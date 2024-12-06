@@ -141,7 +141,7 @@ async function renderMap() {
   legend.addTo(map);
 
   for (let country of ['US', 'UK', 'CA', 'ES', 'FR', 'BE']) {
-    await fetch(`https://raw.githubusercontent.com/tlecardo/testGPX/main/files/${country}.geojson`)
+    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}.geojson`)
       .then(res => res.json())
       .then(res => {
         new L.geoJSON(res, {
@@ -161,7 +161,7 @@ async function renderMap() {
       })
   }
 
-  await fetch(`https://raw.githubusercontent.com/tlecardo/testGPX/main/files/Ferry.geojson`)
+  await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Ferry.geojson`)
     .then(res => res.json())
     .then(res => {
       new L.geoJSON(res, {
@@ -176,7 +176,7 @@ async function renderMap() {
       }).addTo(map);
     })
 
-  await fetch(`https://raw.githubusercontent.com/tlecardo/testGPX/main/files/Velo.geojson`)
+  await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Velo.geojson`)
     .then(res => res.json())
     .then(res => {
       new L.geoJSON(res, {
@@ -193,7 +193,7 @@ async function renderMap() {
 
   let projTracks = ['Vannes']
   for await (let name of projTracks) {
-    await fetch(`https://raw.githubusercontent.com/tlecardo/testGPX/main/files/Projected/${name}.geojson`)
+    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Projected/${name}.geojson`)
       .then(res => res.json())
       .then(res => {
         new L.geoJSON(res, {
@@ -205,7 +205,7 @@ async function renderMap() {
   }
 
   for (let type of ['Bus', 'Voiture']) {
-    await fetch(`https://raw.githubusercontent.com/tlecardo/testGPX/main/files/${type}.geojson`)
+    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${type}.geojson`)
       .then(res => res.json())
       .then(res => {
         new L.geoJSON(res, {
