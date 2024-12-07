@@ -152,7 +152,7 @@ async function renderMap() {
                 `<center>${(feature.properties.distance / 1000).toFixed(2)} km</center>` +
                 `<center>${convertString(feature.properties.time / 1000)}</center>`,
                 { sticky: true, });
-            } catch {}
+            } catch { }
           },
           async: true,
           marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
@@ -190,19 +190,6 @@ async function renderMap() {
         style: { color: "green", opacity: 0.4 },
       }).addTo(map);
     })
-
-  let projTracks = ['Vannes']
-  for await (let name of projTracks) {
-    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Projected/${name}.geojson`)
-      .then(res => res.json())
-      .then(res => {
-        new L.geoJSON(res, {
-          async: true,
-          marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-          style: { color: "blue", opacity: 0.5, dashArray: "10 10" },
-        }).addTo(map);
-      })
-  }
 
   for (let type of ['Bus', 'Voiture']) {
     await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${type}.geojson`)
