@@ -5,7 +5,7 @@ let convertString = function (milisecs) {
 }
 
 async function renderMap() {
-  const map = L.map(document.querySelector(".map"));
+  const map = L.map(document.querySelector(".map"), {'worldCopyJump': true});
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
