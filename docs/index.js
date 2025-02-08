@@ -40,26 +40,15 @@ async function renderMap() {
   var pointSJU = new L.LatLng(18.442935, -66.002363);
 
 
-  // MTL -> NRT
+  // MTL -> TPE
   var planeMarker = L.Marker.movingMarker(
-    [pointYUL, pointYVR, pointNRT],
-    [3000, 3000],
+    [pointYUL, pointYVR, pointNRT, pointTPE],
+    [3000, 3000, 3000],
     options = {
       loop: true,
       icon: iconPlane
     }).addTo(map);
   planeMarker.start();
-
-  // NRT -> TPE
-  var planeMarker = L.Marker.movingMarker(
-    [pointNRT, pointTPE],
-    [3000],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
-
 
   // Tor <-> Reyk
   var planeMarker = L.Marker.movingMarker(
