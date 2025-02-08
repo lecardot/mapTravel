@@ -53,7 +53,7 @@ async function renderMap() {
   // NRT -> TPE
   var planeMarker = L.Marker.movingMarker(
     [pointNRT, pointTPE],
-    [5000],
+    [3000],
     options = {
       loop: true,
       icon: iconPlane
