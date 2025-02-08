@@ -5,7 +5,7 @@ let convertString = function (milisecs) {
 }
 
 async function renderMap() {
-  const map = L.map(document.querySelector(".map"), {'worldCopyJump': true});
+  const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
@@ -25,12 +25,40 @@ async function renderMap() {
   var pointBCN = new L.LatLng(41.2983098, 2.081902809);
   var pointBVA = new L.LatLng(49.4533346, 2.116162099);
 
+  var pointYVR = new L.LatLng(49.1876142, -123.18616160);
+
+  var pointNRT = new L.LatLng(35.7512768, 140.387501785);
+  var pointTPE = new L.LatLng(25.0852645, 121.231277954);
+
+
+
   var pointYMH = new L.LatLng(43.1737220, -79.9232869);
   var pointKEF = new L.LatLng(63.9851196, -22.6056430);
 
   var pointFLL = new L.LatLng(26.076756, -80.150874);
   var pointMIA = new L.LatLng(25.794470, -80.290558);
   var pointSJU = new L.LatLng(18.442935, -66.002363);
+
+
+  // MTL -> NRT
+  var planeMarker = L.Marker.movingMarker(
+    [pointYUL, pointYVR, pointNRT],
+    [3000, 1000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
+  // NRT -> TPE
+  var planeMarker = L.Marker.movingMarker(
+    [pointYUL, pointTPE],
+    [5000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
 
 
   // Tor <-> Reyk
