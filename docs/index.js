@@ -25,12 +25,15 @@ async function renderMap() {
   var pointBCN = new L.LatLng(41.2983098, 2.081902809);
   var pointBVA = new L.LatLng(49.4533346, 2.116162099);
 
-  var pointYVR = new L.LatLng(49.1876142, -123.18616160);
+  var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
+  var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2*180);
+  var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2*180);
 
-  var pointNRT = new L.LatLng(35.7512768, 140.387501785 - 2*180);
-  var pointTPE = new L.LatLng(25.0852645, 121.231277954 - 2*180);
 
-
+  var pointYUL_B = new L.LatLng(45.4680288 + 2*180, -73.7276389 + 2*180);
+  var pointYVR_B = new L.LatLng(49.1876142, -123.18616160 + 2*180);
+  var pointNRT_B = new L.LatLng(35.7512768, 140.387501785);
+  var pointTPE_B = new L.LatLng(25.0852645, 121.231277954);
 
   var pointYMH = new L.LatLng(43.1737220, -79.9232869);
   var pointKEF = new L.LatLng(63.9851196, -22.6056430);
@@ -43,6 +46,15 @@ async function renderMap() {
   // MTL -> TPE
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointYVR, pointNRT, pointTPE],
+    [3000, 3000, 3000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
+  var planeMarker = L.Marker.movingMarker(
+    [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B],
     [3000, 3000, 3000],
     options = {
       loop: true,
