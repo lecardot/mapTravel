@@ -25,6 +25,8 @@ async function renderMap() {
   var pointBCN = new L.LatLng(41.2983098, 2.081902809);
   var pointBVA = new L.LatLng(49.4533346, 2.116162099);
 
+
+
   var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
   var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2*180);
   var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2*180);
@@ -45,7 +47,7 @@ async function renderMap() {
 
   // MTL -> TPE
   var planeMarker = L.Marker.movingMarker(
-    [pointYUL, pointYVR, pointNRT, pointTPE],
+    [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A],
     [3000, 3000, 3000],
     options = {
       loop: true,
