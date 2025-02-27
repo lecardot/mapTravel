@@ -86,7 +86,7 @@ async function renderMap() {
   planeMarker.start();
 
   var planeMarker = L.Marker.movingMarker(
-    [pointTPE_A, pointLAX_A, pointYUL_A],
+    [pointTPE_A, pointLAX_A, pointYUL],
     [3000, 3000, 3000],
     options = {
       loop: true,
