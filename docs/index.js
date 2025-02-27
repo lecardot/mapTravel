@@ -30,12 +30,15 @@ async function renderMap() {
   var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
   var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2*180);
   var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2*180);
-
+  var pointMNL_A = new L.LatLng(14.5093388, 121.020517500 - 2*180);
+  var pointLAX_A = new L.LatLng(33.9418113, -118.417868956);
 
   var pointYUL_B = new L.LatLng(45.4680288 + 2*180, -73.7276389 + 2*180);
   var pointYVR_B = new L.LatLng(49.1876142, -123.18616160 + 2*180);
   var pointNRT_B = new L.LatLng(35.7512768, 140.387501785);
   var pointTPE_B = new L.LatLng(25.0852645, 121.231277954);
+  var pointMNL_B = new L.LatLng(14.5093388, 121.020517500);
+  var pointLAX_B = new L.LatLng(33.9418113, -118.417868956 + 2*180);
 
   var pointYMH = new L.LatLng(43.1737220, -79.9232869);
   var pointKEF = new L.LatLng(63.9851196, -22.6056430);
@@ -63,6 +66,44 @@ async function renderMap() {
       icon: iconPlane
     }).addTo(map);
   planeMarker.start();
+
+  var planeMarker = L.Marker.movingMarker(
+    [pointTPE_A, pointMNL_A, pointTPE_A],
+    [3000, 3000, 3000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
+  var planeMarker = L.Marker.movingMarker(
+    [pointTPE_B, pointMNL_B, pointTPE_B],
+    [3000, 3000, 3000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
+  var planeMarker = L.Marker.movingMarker(
+    [pointTPE_A, pointLAX_A, pointYUL_A],
+    [3000, 3000, 3000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
+
+  var planeMarker = L.Marker.movingMarker(
+    [pointTPE_B, pointLAX_B, pointYUL_B],
+    [3000, 3000, 3000],
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  planeMarker.start();
+
 
   // Tor <-> Reyk
   var planeMarker = L.Marker.movingMarker(
@@ -222,7 +263,7 @@ async function renderMap() {
       }).addTo(map);
     })
 
-  for (let type of ['Bus', 'Voiture']) {
+  for (let type of ['Bus', 'FR_Voiture']) {
     await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${type}.geojson`)
       .then(res => res.json())
       .then(res => {
