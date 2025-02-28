@@ -65,172 +65,48 @@ async function renderMap() {
   var pointSJU = new L.LatLng(18.442935, -66.002363);
 
 
-  // MTL -> TPE
-  var planeMarker = L.Marker.movingMarker(
-    [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A],
-    [getDistance(map, pointYUL, pointYVR_A),
-    getDistance(map, pointYVR_A, pointNRT_A),
-    getDistance(map, pointNRT_A, pointTPE_A)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  // MTL <-> YVR <-> TPE
+  add_flight(map, [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A]).addTo(map).start();
+  add_flight(map, [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B]).addTo(map).start();
 
-  var planeMarker = L.Marker.movingMarker(
-    [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B],
-    [getDistance(map, pointYUL, pointYVR_B),
-    getDistance(map, pointYVR_B, pointNRT_B),
-    getDistance(map, pointNRT_B, pointTPE_B)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  // TPE <-> MNL
+  add_flight(map, [pointTPE_A, pointMNL_A, pointTPE_A]).addTo(map).start();
+  add_flight(map, [pointTPE_B, pointMNL_B, pointTPE_B]).addTo(map).start();
 
-  var planeMarker = L.Marker.movingMarker(
-    [pointTPE_A, pointMNL_A, pointTPE_A],
-    [getDistance(map, pointTPE_A, pointMNL_A),
-    getDistance(map, pointMNL_A, pointTPE_A)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  // TPE <-> LAX <-> YUL
+  add_flight(map, [pointTPE_A, pointLAX_A, pointYUL]).addTo(map).start();
+  add_flight(map, [pointTPE_B, pointLAX_B, pointYUL_B]).addTo(map).start();
 
-  var planeMarker = L.Marker.movingMarker(
-    [pointTPE_B, pointMNL_B, pointTPE_B],
-    [getDistance(map, pointTPE_B, pointMNL_B),
-    getDistance(map, pointMNL_B, pointTPE_B)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
-
-  var planeMarker = L.Marker.movingMarker(
-    [pointTPE_A, pointLAX_A, pointYUL],
-    [getDistance(map, pointTPE_A, pointLAX_A),
-    getDistance(map, pointLAX_A, pointYUL)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
-
-
-  var planeMarker = L.Marker.movingMarker(
-    [pointTPE_B, pointLAX_B, pointYUL_B],
-    [getDistance(map, pointTPE_B, pointLAX_B),
-    getDistance(map, pointLAX_B, pointYUL_B)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
-
-
-  // Tor <-> Reyk
-  var planeMarker = L.Marker.movingMarker(
-    [pointYMH, pointKEF, pointCDG, pointKEF, pointYMH],
-    [getDistance(map, pointYMH, pointKEF),
-    getDistance(map, pointKEF, pointCDG),
-    getDistance(map, pointCDG, pointKEF),
-    getDistance(map, pointKEF, pointYMH)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  // YMH <-> KEF <-> CDG
+  add_flight(map, [pointYMH, pointKEF, pointCDG, pointKEF, pointYMH]).addTo(map).start();
   //L.polyline([pointYYZ, pointKEF, pointCDG, pointKEF, pointYYZ], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
-
   // MTL <-> Fort Laudernale
-  /*
-  var planeMarker = L.Marker.movingMarker(
-    [pointYUL, pointFLL, pointYUL],
-    [getDistance(map, pointYUL, pointFLL),
-    getDistance(map, pointFLL, pointYUL)
-    ],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-    */
-
   add_flight(map, [pointYUL, pointFLL, pointYUL]).addTo(map).start();
-  //planeMarker.start();
   //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Miami <-> San Juan
-  var planeMarker = L.Marker.movingMarker(
-    [pointMIA, pointSJU, pointMIA],
-    [getDistance(map, pointMIA, pointSJU),
-    getDistance(map, pointSJU, pointMIA)
-    ],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointMIA, pointSJU, pointMIA]).addTo(map).start();
   //L.polyline([pointMIA, pointSJU, pointMIA], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Paris -> MTL
-  var planeMarker = L.Marker.movingMarker(
-    [pointCDG, pointYUL],
-    [getDistance(map, pointCDG, pointYUL)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointCDG, pointYUL]).addTo(map).start();
   //L.polyline([pointCDG, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Paris <-> Lisbonne <-> MTL
-  var planeMarker = L.Marker.movingMarker(
-    [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly],
-    [getDistance(map, pointOrly, pointYUL),
-    getDistance(map, pointYUL, pointLOA),
-    getDistance(map, pointLOA, pointOrly)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly]).addTo(map).start();
   //L.polyline([pointOrly, pointLOA, pointYUL], { color: 'black',  weight: 5, opacity: 0.03 }).addTo(map);
 
   // NYC -> Paris
-  var planeMarker = L.Marker.movingMarker(
-    [pointNLI, pointOrly],
-    [getDistance(map, pointNLI, pointOrly)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointNLI, pointOrly]).addTo(map).start();
   //L.polyline([pointNLI, pointOrly], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
   // MTL <-> HLX
-  var planeMarker = L.Marker.movingMarker(
-    [pointYUL, pointHLX, pointYUL],
-    [getDistance(map, pointYUL, pointHLX),
-    getDistance(map, pointHLX, pointOrly)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointYUL, pointHLX, pointYUL]).addTo(map).start();
   //L.polyline([pointYUL, pointHLX], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
   // Barcelone -> Beauvais
-  var planeMarker = L.Marker.movingMarker(
-    [pointBCN, pointBVA],
-    [getDistance(map, pointBCN, pointBVA)],
-    options = {
-      loop: true,
-      icon: iconPlane
-    }).addTo(map);
-  planeMarker.start();
+  add_flight(map, [pointBCN, pointBVA]).addTo(map).start();
   //L.polyline([pointBCN, pointBVA], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
 
