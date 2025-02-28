@@ -32,17 +32,17 @@ async function renderMap() {
 
 
   var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
-  var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2*180);
-  var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2*180);
-  var pointMNL_A = new L.LatLng(14.5093388, 121.020517500 - 2*180);
+  var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2 * 180);
+  var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2 * 180);
+  var pointMNL_A = new L.LatLng(14.5093388, 121.020517500 - 2 * 180);
   var pointLAX_A = new L.LatLng(33.9418113, -118.417868956);
 
-  var pointYUL_B = new L.LatLng(45.4680288 + 2*180, -73.7276389 + 2*180);
-  var pointYVR_B = new L.LatLng(49.1876142, -123.18616160 + 2*180);
+  var pointYUL_B = new L.LatLng(45.4680288 + 2 * 180, -73.7276389 + 2 * 180);
+  var pointYVR_B = new L.LatLng(49.1876142, -123.18616160 + 2 * 180);
   var pointNRT_B = new L.LatLng(35.7512768, 140.387501785);
   var pointTPE_B = new L.LatLng(25.0852645, 121.231277954);
   var pointMNL_B = new L.LatLng(14.5093388, 121.020517500);
-  var pointLAX_B = new L.LatLng(33.9418113, -118.417868956 + 2*180);
+  var pointLAX_B = new L.LatLng(33.9418113, -118.417868956 + 2 * 180);
 
   var pointYMH = new L.LatLng(43.1737220, -79.9232869);
   var pointKEF = new L.LatLng(63.9851196, -22.6056430);
@@ -55,9 +55,9 @@ async function renderMap() {
   // MTL -> TPE
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A],
-    [getDistance(map, pointYUL, pointYVR_A), 
-      getDistance(map, pointYVR_A, pointNRT_A), 
-      getDistance(map, pointNRT_A, pointTPE_A)],
+    [getDistance(map, pointYUL, pointYVR_A),
+    getDistance(map, pointYVR_A, pointNRT_A),
+    getDistance(map, pointNRT_A, pointTPE_A)],
     options = {
       loop: true,
       icon: iconPlane
@@ -66,9 +66,9 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B],
-    [getDistance(map, pointYUL, pointYVR_B), 
-      getDistance(map, pointYVR_B, pointNRT_B), 
-      getDistance(map, pointNRT_B, pointTPE_B)],
+    [getDistance(map, pointYUL, pointYVR_B),
+    getDistance(map, pointYVR_B, pointNRT_B),
+    getDistance(map, pointNRT_B, pointTPE_B)],
     options = {
       loop: true,
       icon: iconPlane
@@ -77,7 +77,8 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointTPE_A, pointMNL_A, pointTPE_A],
-    [3000, 3000, 3000],
+    [getDistance(map, pointTPE_A, pointMNL_A),
+    getDistance(map, pointMNL_A, pointTPE_A)],
     options = {
       loop: true,
       icon: iconPlane
@@ -86,7 +87,8 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointTPE_B, pointMNL_B, pointTPE_B],
-    [3000, 3000, 3000],
+    [getDistance(map, pointTPE_B, pointMNL_B),
+    getDistance(map, pointMNL_B, pointTPE_B)],
     options = {
       loop: true,
       icon: iconPlane
@@ -95,7 +97,8 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointTPE_A, pointLAX_A, pointYUL],
-    [3000, 3000, 3000],
+    [getDistance(map, pointTPE_A, pointLAX_A),
+    getDistance(map, pointLAX_A, pointYUL)],
     options = {
       loop: true,
       icon: iconPlane
@@ -105,7 +108,8 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointTPE_B, pointLAX_B, pointYUL_B],
-    [3000, 3000, 3000],
+    [getDistance(map, pointTPE_B, pointLAX_B),
+    getDistance(map, pointLAX_B, pointYUL_B)],
     options = {
       loop: true,
       icon: iconPlane
@@ -116,7 +120,10 @@ async function renderMap() {
   // Tor <-> Reyk
   var planeMarker = L.Marker.movingMarker(
     [pointYMH, pointKEF, pointCDG, pointKEF, pointYMH],
-    [5000, 3000, 3000, 5000],
+    [getDistance(map, pointYMH, pointKEF),
+    getDistance(map, pointKEF, pointCDG),
+    getDistance(map, pointCDG, pointKEF),
+    getDistance(map, pointKEF, pointYMH)],
     options = {
       loop: true,
       icon: iconPlane
@@ -128,7 +135,9 @@ async function renderMap() {
   // MTL <-> Fort Laudernale
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointFLL, pointYUL],
-    [3000, 3000],
+    [getDistance(map, pointYUL, pointFLL),
+    getDistance(map, pointFLL, pointYUL)
+    ],
     options = {
       loop: true,
       icon: iconPlane
@@ -139,7 +148,9 @@ async function renderMap() {
   // Miami <-> San Juan
   var planeMarker = L.Marker.movingMarker(
     [pointMIA, pointSJU, pointMIA],
-    [2500, 2500],
+    [getDistance(map, pointMIA, pointSJU),
+    getDistance(map, pointSJU, pointMIA)
+    ],
     options = {
       loop: true,
       icon: iconPlane
@@ -150,7 +161,7 @@ async function renderMap() {
   // Paris -> MTL
   var planeMarker = L.Marker.movingMarker(
     [pointCDG, pointYUL],
-    [4500],
+    [getDistance(map, pointCDG, pointYUL)],
     options = {
       loop: true,
       icon: iconPlane
@@ -161,7 +172,9 @@ async function renderMap() {
   // Paris <-> Lisbonne <-> MTL
   var planeMarker = L.Marker.movingMarker(
     [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly],
-    [2000, 4500, 4500, 2000],
+    [getDistance(map, pointOrly, pointYUL),
+      getDistance(map, pointYUL, pointLOA),
+      getDistance(map, pointLOA, pointOrly)],
     options = {
       loop: true,
       icon: iconPlane
@@ -172,7 +185,7 @@ async function renderMap() {
   // NYC -> Paris
   var planeMarker = L.Marker.movingMarker(
     [pointNLI, pointOrly],
-    [4500],
+    [getDistance(map, pointNLI, pointOrly)],
     options = {
       loop: true,
       icon: iconPlane
@@ -183,7 +196,8 @@ async function renderMap() {
   // MTL <-> HLX
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointHLX, pointYUL],
-    [1500, 1500],
+    [getDistance(map, pointYUL, pointHLX),
+      getDistance(map, pointHLX, pointOrly)],
     options = {
       loop: true,
       icon: iconPlane
@@ -194,7 +208,7 @@ async function renderMap() {
   // Barcelone -> Beauvais
   var planeMarker = L.Marker.movingMarker(
     [pointBCN, pointBVA],
-    [2000],
+    [getDistance(map, pointBCN, pointBVA)],
     options = {
       loop: true,
       icon: iconPlane
