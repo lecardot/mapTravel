@@ -17,19 +17,16 @@ let iconPlane = L.divIcon({
 let add_flight = function (map, points) {
 
   let dist = []
-  for (let i = 0; i < points.length - 2; i++) {
+  for (let i = 0; i < points.length - 1; i++) {
     dist.push(getDistance(map, points[i], points[i + 1]))
   }
 
-  var planeMarker = L.Marker.movingMarker(
+  return L.Marker.movingMarker(
     points, dist,
     options = {
       loop: true,
       icon: iconPlane
     });
-
-    planeMarker.addTo(map);
-    planeMarker.start();
 }
 
 async function renderMap() {
@@ -161,7 +158,7 @@ async function renderMap() {
     }).addTo(map);
     */
 
-  add_flight(map, [pointYUL, pointFLL, pointYUL]);
+  add_flight(map, [pointYUL, pointFLL, pointYUL]).addTo(map).start();
   //planeMarker.start();
   //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
