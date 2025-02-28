@@ -8,7 +8,7 @@ let getDistance = (map, cordsFrom, cordsTo) =>
   map.distance(cordsFrom, cordsTo).toFixed(0) / 1000;
 
 
-let add_flight = function (points) {
+let add_flight = function (map, points) {
 
   let dist = []
   for (let i = 0; i < points.length - 2; i++) {
@@ -160,7 +160,7 @@ async function renderMap() {
     }).addTo(map);
     */
 
-  add_flight([pointYUL, pointFLL, pointYUL]).addTo(map).start();
+  add_flight(map, [pointYUL, pointFLL, pointYUL]).addTo(map).start();
   //planeMarker.start();
   //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
