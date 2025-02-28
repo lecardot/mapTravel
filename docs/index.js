@@ -5,7 +5,7 @@ let convertString = function (milisecs) {
 }
 
 let getDistance = (map, cordsFrom, cordsTo) =>
-  map.distance(cordsFrom, cordsTo).toFixed(0);
+  map.distance(cordsFrom, cordsTo).toFixed(0) / 1000;
 
 
 async function renderMap() {
