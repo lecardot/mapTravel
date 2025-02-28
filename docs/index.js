@@ -25,7 +25,7 @@ let add_flight = function (map, points) {
   return planeMarker
 }
 
-L.prototype.add_flight = function (points) {
+L.Class.prototype.add_flight = function (points) {
   let dist = []
   for (let i = 0; i < points.length - 2; i++) {
     dist.push(getDistance(map, points[i], points[i + 1]))
