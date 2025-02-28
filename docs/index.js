@@ -8,6 +8,38 @@ let getDistance = (map, cordsFrom, cordsTo) =>
   map.distance(cordsFrom, cordsTo).toFixed(0) / 1000;
 
 
+let add_flight = function (map, points) {
+
+  let dist = []
+  for (let i = 0; i < points.length - 2; i++) {
+    dist.push(getDistance(map, points[i], points[i + 1]))
+  }
+
+  var planeMarker = L.Marker.movingMarker(
+    points,
+    dist,
+    options = {
+      loop: true,
+      icon: iconPlane
+    }).addTo(map);
+  return planeMarker
+}
+
+L.prototype.add_flight = function (points) {
+  let dist = []
+  for (let i = 0; i < points.length - 2; i++) {
+    dist.push(getDistance(map, points[i], points[i + 1]))
+  }
+
+  return L.Marker.movingMarker(
+    points,
+    dist,
+    options = {
+      loop: true,
+      icon: iconPlane
+    })
+}
+
 async function renderMap() {
   const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
@@ -28,8 +60,6 @@ async function renderMap() {
   var pointHLX = new L.LatLng(44.8769224, -63.5163199);
   var pointBCN = new L.LatLng(41.2983098, 2.081902809);
   var pointBVA = new L.LatLng(49.4533346, 2.116162099);
-
-
 
   var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
   var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2 * 180);
@@ -133,6 +163,7 @@ async function renderMap() {
 
 
   // MTL <-> Fort Laudernale
+  /*
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointFLL, pointYUL],
     [getDistance(map, pointYUL, pointFLL),
@@ -142,7 +173,10 @@ async function renderMap() {
       loop: true,
       icon: iconPlane
     }).addTo(map);
-  planeMarker.start();
+    */
+
+  L.add_flight([pointYUL, pointFLL, pointYUL]).addTo(map).start();
+  //planeMarker.start();
   //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Miami <-> San Juan
@@ -173,8 +207,8 @@ async function renderMap() {
   var planeMarker = L.Marker.movingMarker(
     [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly],
     [getDistance(map, pointOrly, pointYUL),
-      getDistance(map, pointYUL, pointLOA),
-      getDistance(map, pointLOA, pointOrly)],
+    getDistance(map, pointYUL, pointLOA),
+    getDistance(map, pointLOA, pointOrly)],
     options = {
       loop: true,
       icon: iconPlane
@@ -197,7 +231,7 @@ async function renderMap() {
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointHLX, pointYUL],
     [getDistance(map, pointYUL, pointHLX),
-      getDistance(map, pointHLX, pointOrly)],
+    getDistance(map, pointHLX, pointOrly)],
     options = {
       loop: true,
       icon: iconPlane
