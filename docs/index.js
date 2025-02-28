@@ -7,6 +7,12 @@ let convertString = function (milisecs) {
 let getDistance = (map, cordsFrom, cordsTo) =>
   map.distance(cordsFrom, cordsTo).toFixed(0) / 1000;
 
+let iconPlane = L.divIcon({
+  className: 'custom-div-icon',
+  html: '<div class="dot_plane"></div>',
+  iconAnchor: [4, 12.3]
+});
+
 
 let add_flight = function (map, points) {
 
@@ -15,14 +21,12 @@ let add_flight = function (map, points) {
     dist.push(getDistance(map, points[i], points[i + 1]))
   }
 
-  var planeMarker = L.Marker.movingMarker(
-    points,
-    dist,
+  return L.Marker.movingMarker(
+    points, dist,
     options = {
       loop: true,
       icon: iconPlane
     });
-  return planeMarker
 }
 
 async function renderMap() {
@@ -30,12 +34,6 @@ async function renderMap() {
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
-
-  let iconPlane = L.divIcon({
-    className: 'custom-div-icon',
-    html: '<div class="dot_plane"></div>',
-    iconAnchor: [4, 12.3]
-  });
 
   var pointCDG = new L.LatLng(48.9645519, 2.438448005);
   var pointYUL = new L.LatLng(45.4680288, -73.7276389);
