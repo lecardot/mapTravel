@@ -32,6 +32,8 @@ let add_flight = function (map, points) {
 async function renderMap() {
   const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
+  console.log(typeof(map))
+
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
 
