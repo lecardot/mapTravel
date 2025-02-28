@@ -13,13 +13,9 @@ let iconPlane = L.divIcon({
   iconAnchor: [4, 12.3]
 });
 
-
 let add_flight = function (map, points) {
 
-  let dist = []
-  for (let i = 0; i < points.length - 1; i++) {
-    dist.push(getDistance(map, points[i], points[i + 1]))
-  }
+  let dist = Array.from({length: points.length-1}, (_, i) => getDistance(map, points[i], points[i + 1]))
 
   return L.Marker.movingMarker(
     points, dist,
@@ -32,7 +28,7 @@ let add_flight = function (map, points) {
 async function renderMap() {
   const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
-  console.log(typeof(map))
+  console.log(map.constructor.name)
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
