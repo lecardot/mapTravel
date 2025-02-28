@@ -15,7 +15,7 @@ let iconPlane = L.divIcon({
 
 let add_flight = function (map, points) {
 
-  let dist = Array.from({length: points.length-1}, (_, i) => getDistance(map, points[i], points[i + 1]))
+  let dist = Array.from({ length: points.length - 1 }, (_, i) => getDistance(map, points[i], points[i + 1]))
 
   return L.Marker.movingMarker(
     points, dist,
@@ -27,8 +27,6 @@ let add_flight = function (map, points) {
 
 async function renderMap() {
   const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
-
-  console.log(L.constructor.name)
 
   L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
   L.control.scale().addTo(map);
@@ -62,7 +60,6 @@ async function renderMap() {
   var pointMIA = new L.LatLng(25.794470, -80.290558);
   var pointSJU = new L.LatLng(18.442935, -66.002363);
 
-
   // MTL <-> YVR <-> TPE
   add_flight(map, [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A]).addTo(map).start();
   add_flight(map, [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B]).addTo(map).start();
@@ -77,38 +74,30 @@ async function renderMap() {
 
   // YMH <-> KEF <-> CDG
   add_flight(map, [pointYMH, pointKEF, pointCDG, pointKEF, pointYMH]).addTo(map).start();
-  //L.polyline([pointYYZ, pointKEF, pointCDG, pointKEF, pointYYZ], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // MTL <-> Fort Laudernale
   add_flight(map, [pointYUL, pointFLL, pointYUL]).addTo(map).start();
-  //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Miami <-> San Juan
   add_flight(map, [pointMIA, pointSJU, pointMIA]).addTo(map).start();
-  //L.polyline([pointMIA, pointSJU, pointMIA], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Paris -> MTL
   add_flight(map, [pointCDG, pointYUL]).addTo(map).start();
-  //L.polyline([pointCDG, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
   // Paris <-> Lisbonne <-> MTL
   add_flight(map, [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly]).addTo(map).start();
-  //L.polyline([pointOrly, pointLOA, pointYUL], { color: 'black',  weight: 5, opacity: 0.03 }).addTo(map);
 
   // NYC -> Paris
   add_flight(map, [pointNLI, pointOrly]).addTo(map).start();
-  //L.polyline([pointNLI, pointOrly], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
   // MTL <-> HLX
   add_flight(map, [pointYUL, pointHLX, pointYUL]).addTo(map).start();
-  //L.polyline([pointYUL, pointHLX], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
   // Barcelone -> Beauvais
   add_flight(map, [pointBCN, pointBVA]).addTo(map).start();
-  //L.polyline([pointBCN, pointBVA], { color: 'black', weight: 5, opacity: 0.03 }).addTo(map);
 
 
-  map.fitBounds(new L.LatLngBounds(new L.LatLng(32, -122.292293), new L.LatLng(45.500295, -73.567149)));
+  map.fitBounds(new L.LatLngBounds(new L.LatLng(42, -80.9), new L.LatLng(46,-73)));
 
   var legend = L.control({ position: "bottomleft" });
 
@@ -119,7 +108,6 @@ async function renderMap() {
     div.innerHTML += '<i style="background-color: rgba(255, 0, 0, 0.5)"></i><span>Ferry</span><br>';
     div.innerHTML += '<i style="background-color: rgba(0, 0, 0, 0.5)"></i><span>Route</span><br>';
     div.innerHTML += '<i style="background-color: rgba(0, 255, 0, 0.5)"></i><span>Vélo</span><br>';
-    //div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Grænse</span><br>';
     return div;
   };
 
@@ -187,7 +175,6 @@ async function renderMap() {
         }).addTo(map);
       })
   }
-
 }
 
 renderMap().catch(console.error)
