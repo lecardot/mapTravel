@@ -25,7 +25,7 @@ let add_flight = function (map, points) {
   return planeMarker
 }
 
-L.Class.prototype.add_flight = function (points) {
+L.Marker.prototype.add_flight = function (points) {
   let dist = []
   for (let i = 0; i < points.length - 2; i++) {
     dist.push(getDistance(map, points[i], points[i + 1]))
@@ -175,7 +175,7 @@ async function renderMap() {
     }).addTo(map);
     */
 
-  L.add_flight([pointYUL, pointFLL, pointYUL]).addTo(map).start();
+  L.Marker.add_flight([pointYUL, pointFLL, pointYUL]).addTo(map).start();
   //planeMarker.start();
   //L.polyline([pointYUL, pointFLL, pointYUL], { color: 'black', weight: 5, opacity: 0.03}).addTo(map);
 
