@@ -96,8 +96,7 @@ async function renderMap() {
   // Barcelone -> Beauvais
   add_flight(map, [pointBCN, pointBVA]).addTo(map).start();
 
-
-  map.fitBounds(new L.LatLngBounds(new L.LatLng(42, -80.9), new L.LatLng(46,-73)));
+  map.panTo(pointYUL, 6);
 
   var legend = L.control({ position: "bottomleft" });
 
