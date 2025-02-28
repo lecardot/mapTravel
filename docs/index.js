@@ -8,7 +8,7 @@ let getDistance = (map, cordsFrom, cordsTo) =>
   map.distance(cordsFrom, cordsTo).toFixed(0) / 1000;
 
 
-let add_flight = function (map, points) {
+let add_flight = function (points) {
 
   let dist = []
   for (let i = 0; i < points.length - 2; i++) {
