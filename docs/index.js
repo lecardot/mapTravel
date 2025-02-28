@@ -4,6 +4,10 @@ let convertString = function (milisecs) {
   return `${diff_hours}h${diff_minutes}m`
 }
 
+let getDistance = (map, cordsFrom, cordsTo) =>
+  map.distance(cordsFrom, cordsTo).toFixed(0);
+
+
 async function renderMap() {
   const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
@@ -51,7 +55,9 @@ async function renderMap() {
   // MTL -> TPE
   var planeMarker = L.Marker.movingMarker(
     [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A],
-    [3000, 3000, 3000],
+    [getDistance(map, pointYUL, pointYVR_A), 
+      getDistance(map, pointYVR_A, pointNRT_A), 
+      getDistance(map, pointNRT_A, pointTPE_A)],
     options = {
       loop: true,
       icon: iconPlane
@@ -60,7 +66,9 @@ async function renderMap() {
 
   var planeMarker = L.Marker.movingMarker(
     [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B],
-    [3000, 3000, 3000],
+    [getDistance(map, pointYUL, pointYVR_B), 
+      getDistance(map, pointYVR_B, pointNRT_B), 
+      getDistance(map, pointNRT_B, pointTPE_B)],
     options = {
       loop: true,
       icon: iconPlane
