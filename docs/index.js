@@ -112,7 +112,7 @@ async function renderMap() {
 
     legend.addTo(map);
 
-    for (let country of ['US', 'UK', 'CA', 'ES', 'FR', 'BE']) {
+    for (let country of ['US', 'UK', 'CA', 'ES', 'FR', 'BE', 'JP']) {
         await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}.geojson`)
             .then(res => res.json())
             .then(res => {
@@ -174,7 +174,6 @@ async function renderMap() {
                 }).addTo(map);
             })
     }
-
 
     await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Project.geojson`)
         .then(res => res.json())
