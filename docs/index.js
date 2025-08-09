@@ -15,7 +15,7 @@ let iconPlane = L.divIcon({
 
 let add_flight = function (map, points) {
 
-    let dist = Array.from({ length: points.length - 1 }, (_, i) => getDistance(map, points[i], points[i + 1]))
+    let dist = Array.from({ length: points.length - 1 }, (_, i) => 2 * getDistance(map, points[i], points[i + 1]))
 
     return L.Marker.movingMarker(
         points, dist,
@@ -39,6 +39,10 @@ async function renderMap() {
     var pointHLX = new L.LatLng(44.8769224, -63.5163199);
     var pointBCN = new L.LatLng(41.2983098, 2.081902809);
     var pointBVA = new L.LatLng(49.4533346, 2.116162099);
+    var pointYNA = new L.LatLng(50.18966, -61.788792);
+    var pointYZV = new L.LatLng(50.22394, -66.252691);
+    var pointYQB = new L.LatLng(46.788519, -71.397434);
+    var pointYHU = new L.LatLng(45.515363, -73.411563);
 
     var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
     var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2 * 180);
@@ -95,6 +99,9 @@ async function renderMap() {
 
     // Barcelone -> Beauvais
     add_flight(map, [pointBCN, pointBVA]).addTo(map).start();
+
+    // Natashquan -> MTL
+    add_flight(map, [pointYNA, pointYZV, pointYQB, pointYHU]).addTo(map).start();
 
     map.setView(pointYUL, 6);
 
