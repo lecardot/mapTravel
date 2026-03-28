@@ -68,6 +68,9 @@ function renderMap() {
     add_flight(map, [pointYUL, pointYVR_A, pointNRT_A, pointTPE_A]).addTo(map).start();
     add_flight(map, [pointYUL_B, pointYVR_B, pointNRT_B, pointTPE_B]).addTo(map).start();
 
+    // MTL <-> YVR
+    add_flight(map, [pointYUL, pointYVR_A, pointYUL]).addTo(map).start();
+
     // TPE <-> MNL
     add_flight(map, [pointTPE_A, pointMNL_A, pointTPE_A]).addTo(map).start();
     add_flight(map, [pointTPE_B, pointMNL_B, pointTPE_B]).addTo(map).start();
