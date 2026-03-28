@@ -25,7 +25,7 @@ let add_flight = function (map, points) {
         });
 }
 
-async function renderMap() {
+function renderMap() {
     const map = L.map(document.querySelector(".map"), { 'worldCopyJump': true });
 
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
@@ -119,8 +119,8 @@ async function renderMap() {
 
     legend.addTo(map);
 
-    for (let country of ['US', 'UK', 'CA', 'ES', 'FR', 'BE', 'JP', 'TP', 'PO']) {
-        await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Tracks.geojson`)
+    for (const country of ['US', 'UK', 'CA', 'ES', 'FR', 'BE', 'JP', 'TP', 'PO']) {
+        fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Tracks.geojson`)
             .then(res => res.json())
             .then(res => {
                 new L.geoJSON(res, {
@@ -141,8 +141,8 @@ async function renderMap() {
     }
 
 
-    for (let country of ['US', 'CA', 'FR', 'PO']) {
-        await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Water.geojson`)
+    for (const country of ['US', 'CA', 'FR', 'PO']) {
+        fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Water.geojson`)
                    .then(res => res.json())
         .then(res => {
             new L.geoJSON(res, {
@@ -158,8 +158,8 @@ async function renderMap() {
             })
     }
 
-    for (let country of ['CA', 'FR', 'UK', 'US']) {
-        await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Roads.geojson`)
+    for (const country of ['CA', 'FR', 'IS', 'UK', 'US']) {
+        fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Roads.geojson`)
             .then(res => res.json())
             .then(res => {
                 new L.geoJSON(res, {
@@ -170,19 +170,7 @@ async function renderMap() {
             })
     }
 
-    for (let type of ['Bus', 'FR/FR_Voiture']) {
-        await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${type}.geojson`)
-            .then(res => res.json())
-            .then(res => {
-                new L.geoJSON(res, {
-                    async: true,
-                    marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                    style: { color: "black", opacity: 0.3 },
-                }).addTo(map);
-            })
-    }
-
-    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/FR/Bicycle.geojson`)
+    fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/FR/Bicycle.geojson`)
         .then(res => res.json())
         .then(res => {
             new L.geoJSON(res, {
@@ -197,7 +185,7 @@ async function renderMap() {
             }).addTo(map);
         })
 
-    await fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Project.geojson`)
+    fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/Project.geojson`)
         .then(res => res.json())
         .then(res => {
             new L.geoJSON(res, {
