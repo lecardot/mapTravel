@@ -44,6 +44,12 @@ function renderMap() {
     var pointYQB = new L.LatLng(46.788519, -71.397434);
     var pointYHU = new L.LatLng(45.515363, -73.411563);
 
+    var pointYBC = new L.LatLng(49.132498, -68.203038);
+    var pointZGS = new L.LatLng(50.259673, -60.673596);
+    var pointYHR = new L.LatLng(50.468528, -59.637767);
+    var pointYIF = new L.LatLng(51.209900, -58.657335);
+    var pointYBX = new L.LatLng(51.443310, -57.184996);
+
     var pointYVR_A = new L.LatLng(49.1876142, -123.18616160);
     var pointNRT_A = new L.LatLng(35.7512768, 140.387501785 - 2 * 180);
     var pointTPE_A = new L.LatLng(25.0852645, 121.231277954 - 2 * 180);
@@ -91,6 +97,9 @@ function renderMap() {
     // Paris -> MTL
     add_flight(map, [pointCDG, pointYUL]).addTo(map).start();
 
+    // Paris <-> MTL
+    add_flight(map, [pointYUL, pointOrly, pointYUL]).addTo(map).start();
+
     // Paris <-> Lisbonne <-> MTL
     add_flight(map, [pointOrly, pointLOA, pointYUL, pointLOA, pointOrly]).addTo(map).start();
 
@@ -105,6 +114,12 @@ function renderMap() {
 
     // Natashquan -> MTL
     add_flight(map, [pointYNA, pointYZV, pointYQB, pointYHU]).addTo(map).start();
+
+    // La Romaine -> MTL
+    add_flight(map, [pointZGS, pointYNA, pointYZV, pointYBC, pointYQB, pointYHU]).addTo(map).start();
+
+    // MTL -> Blanc-Sablon
+    add_flight(map, [pointYHU, pointYQB, pointYBC, pointYZV, pointYNA, pointZGS, pointYHR, pointYIF, pointYBX]).addTo(map).start();
 
     map.setView(pointYUL, 6);
 
