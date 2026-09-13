@@ -159,7 +159,7 @@ function renderMap() {
     }
 
 
-    for (const country of ['US', 'CA', 'FR', 'PO']) {
+    for (const country of ['US', 'UK', 'CA', 'FR', 'PO']) {
         fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Water.geojson`)
                    .then(res => res.json())
         .then(res => {
