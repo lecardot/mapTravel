@@ -166,7 +166,8 @@ function renderMap() {
             new L.geoJSON(res, {
                 onEachFeature: function (feature, layer) {
                     layer.bindTooltip(
-                        `<center class="track title">${feature.properties.name}</center>`,
+                        feature.properties.name ? `<center class="track title">${feature.properties.name}</center>` : "" +
+                        feature.properties.distance ? `<center>${(feature.properties.distance / 1000).toFixed(2)} km</center>` : "",
                         { sticky: true, });
                 },
                 async: true,
