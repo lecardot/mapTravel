@@ -143,13 +143,14 @@ function renderMap() {
             .then(res => {
                 new L.geoJSON(res, {
                     onEachFeature: function (feature, layer) {
-                        try {
+                        if (feature.properties) {
                             layer.bindTooltip(
-                                `<center class="track title">${feature.properties.name}</center>` +
-                                `<center>${(feature.properties.distance / 1000).toFixed(2)} km</center>` +
-                                `<center>${convertString(feature.properties.time / 1000)}</center>`,
-                                { sticky: true, });
-                        } catch { }
+                                (feature.properties.name ? `<center class="track title">${feature.properties.name}</center>` : "") +
+                                (feature.properties.distance ? `<center>${(feature.properties.distance / 1000).toFixed(0)}km</center>` : "") +
+                                (feature.properties.time ? `<center>${convertString(feature.properties.time / 1000)}</center>` : ""),
+                                { sticky: true, }
+                            );
+                        }
                     },
                     async: true,
                     marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
@@ -161,19 +162,22 @@ function renderMap() {
 
     for (const country of ['US', 'UK', 'CA', 'FR', 'PO']) {
         fetch(`https://raw.githubusercontent.com/lecardot/mapTravel/main/files/${country}/Water.geojson`)
-                   .then(res => res.json())
-        .then(res => {
-            new L.geoJSON(res, {
-                onEachFeature: function (feature, layer) {
-                    layer.bindTooltip(
-                        feature.properties.name ? `<center class="track title">${feature.properties.name}</center>` : "" +
-                        feature.properties.distance ? `<center>${(feature.properties.distance / 1000).toFixed(2)} km</center>` : "",
-                        { sticky: true, });
-                },
-                async: true,
-                marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
-                style: { color: "red", opacity: 0.5 },
-            }).addTo(map);
+            .then(res => res.json())
+            .then(res => {
+                new L.geoJSON(res, {
+                    onEachFeature: function (feature, layer) {
+                        if (feature.properties) {
+                            layer.bindTooltip(
+                                (feature.properties.name ? `<center class="track title">${feature.properties.name}</center>` : "") +
+                                (feature.properties.distance ? `<center>${(feature.properties.distance / 1000).toFixed(0)}km</center>` : ""),
+                                { sticky: true, }
+                            );
+                        }
+                    },
+                    async: true,
+                    marker_options: { startIconUrl: '', endIconUrl: '', shadowUrl: '' },
+                    style: { color: "red", opacity: 0.5 },
+                }).addTo(map);
             })
     }
 
